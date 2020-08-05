@@ -15,11 +15,3 @@ socket=/tmp/mysql.sock
 [mysql]
 socket=/tmp/mysql.sock
 prompt=3306 [\\d]>
-
-#简易的配制文件/etc/my.cnf
-#user 
-#basedir
-#datadir 
-#server_id
-#port
-#socket 
