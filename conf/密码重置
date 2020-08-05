@@ -1,0 +1,5 @@
+[root@db01 ~]# mysqld_safe --skip-grant-tables --skip-networking &
+mysql> flush privileges;
+mysql> alter user root@'localhost' identified by '123456';
+[root@db01 ~]# pkill mysqld
+[root@db01 ~]# systemctl start  mysqld

@@ -1,7 +1,36 @@
-#简易的配制文件/etc/my.cnf
-#user 
-#basedir
-#datadir 
-#server_id
-#port
-#socket 
+初始配置文件
+初始化配置文件的默认读取路径
+[root@db01 ~]# mysqld --help --verbose |grep my.cnf
+/etc/my.cnf /etc/mysql/my.cnf /usr/local/mysql/etc/my.cnf ~/.my.cnf
+注:
+默认情况下，MySQL启动时，会依次读取以上配置文件，如果有重复选项，会以最后一个文件设置的为准。
+但是，如果启动时加入了--defaults-file=xxxx时，以上的所有文件都不会读取.
+
+配置文件的书写方式
+[标签]
+配置项=xxxx
+
+标签类型：服务端、客户端
+服务器端标签：
+[mysqld]
+[mysqld_safe]
+[server]
+
+客户端标签：
+[mysql]
+[mysqldump]
+[client]
+
+配置文件的示例展示：
+[root@db01 ~]# cat /etc/my.cnf
+[mysqld]
+user=mysql
+basedir=/app/mysql
+datadir=/data/mysql
+socket=/tmp/mysql.sock
+server_id=6
+port=3306
+log_error=/data/mysql/mysql.log
+[mysql]
+socket=/tmp/mysql.sock
+prompt=Master [\\d]>
