@@ -1,0 +1,25 @@
+mysql 3306 配置文件
+[mysqld]
+user=mysql
+#用户
+basedir=/app/mysql
+#mysql目录
+datadir=/data/3306
+#data目录
+server_id=206
+#唯一ID 不能重复非常重要
+port=3306
+#监听端口
+socket=/tmp/mysql.sock
+#监听sock
+[mysql]
+socket=/tmp/mysql.sock
+prompt=3306 [\\d]>
+
+#简易的配制文件/etc/my.cnf
+#user 
+#basedir
+#datadir 
+#server_id
+#port
+#socket 
