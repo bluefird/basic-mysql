@@ -1,6 +1,6 @@
 #!/bin/bash
-# mysql 5.7 数据库备份
-# mysqldump 实现
+# mysql 5.7 数据库存活检测
+# mysqladmin 实现
 # 日期： 2020-08-06
 # 作者： github bluefird
 # commands:mysql_check
