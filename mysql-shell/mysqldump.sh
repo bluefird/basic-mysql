@@ -8,9 +8,9 @@
 # 添加执行权限： chmod +x mysqldump.sh 
 # 使用方式 : mysqldump.sh all / mysqldump base 
 ###########################user passowrd
-#用户 必须
+#数据库用户 必须
 USER=root
-#密码 必须
+#数据库用户密码 必须
 PASSWORD=123456
 #以日期作为文件名
 DATENAME=`date +%Y%d%H%M`
