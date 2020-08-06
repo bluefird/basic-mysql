@@ -55,6 +55,18 @@ else
 fi
 
 ##########################mysqldump
+###########################检查数据库是否启动
+mysql_check () {
+    mysqladmin -P${PORT} -u${USER} -p${PASSWORD} ping  &>/dev/null
+    if  [ "$?" -eq 0 ];then
+        :
+    else 
+        echo -e "MYSQL is error....."
+        echo -e "USER or PASSWORD or PORT is error....."
+        exit 1
+    fi
+}
+
 ##########################完全备份
 
 
@@ -82,7 +94,7 @@ datadump() {
             if [ "$?" == 0 ];then
                 echo "${DB}_${DATENAME}.sql backup sucess " >> ${base_sucess_log}
             else
-                echo "${DB}_${DATENAME}.sql backup error  " >> ${base_sucess_log}
+                echo "${DB}_${DATENAME}.sql backup error  " >> ${base_error_log}
             fi
         done
     else 
@@ -93,6 +105,7 @@ datadump() {
 
 ##########################main 函数 主要运行
 main() {
+    mysql_check
     case $1 in 
         all)
             ALLDUMP
