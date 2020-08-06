@@ -20,7 +20,7 @@ SOCKET=/tmp/mysql.sock
 #备份目录
 BACKDIR=/backup/innodb
 #目录名称
-DIRNAME=`date +%Y-%m-%d-%H-%S`
+DIRNAME=`date +%Y%m%d%H%S`
 #完全备份目录
 FULLDIR=${BACKDIR}/full/${DIRNAME}
 #增量备份目录
