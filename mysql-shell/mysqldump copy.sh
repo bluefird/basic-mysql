@@ -8,25 +8,25 @@
 # 添加执行权限： chmod +x mysqldump.sh 
 # 使用方式 : mysqldump.sh all / mysqldump base 
 ###########################user passowrd
-#用户 必须
+#用户
 USER=root
-#密码 必须
+#用户密码
 PASSWORD=123456
-#以日期作为文件名
+#以时间为备份名
 DATENAME=`date +%Y%d%H%M`
-# --single-transaction 不锁表备份 参数看自己是否需要添加
-#全局备份参数 --max-allowed-packet=256M 自己调整 看库大小
-dump_args='-R -E --triggers --master-data=2   --set-gtid-purged=off --max-allowed-packet=256M'
-#默认 必填3306，不是 默认可以自己修改
+#默认 3306
 PORT=3306
-#全局备份默认空，库备份自己填写，空格隔开,结尾不留空格
+#单库备份需要，自己填写需要备份的库，空格隔开,结尾不留空格
 DATANAME="world mysql employees sakila"
-####################################backup dir
+#全局备份参数,可以自己添加
+dump_args='-R -E --triggers --master-data=2   --set-gtid-purged=off'
+###################backup dir
 #全库备份目录
 FULLDIR=/backup/dump/full
 #单库备份目录
 DATADIR=/backup/dump/base
 ####################log dir
+# 日志输出目录
 LOGDIR=/backup/log
 # 全备 日志
 full_success_log=${LOGDIR}/full_sucess.log
@@ -36,7 +36,7 @@ base_sucess_log=${LOGDIR}/base_sucess.log
 base_error_log=${LOGDIR}/base_error.log
 # mysqldump 错误警告备份信息日志
 dump_log=${LOGDIR}/dump.log
-############################diretory 
+############################dir test 
 if [ -d "${FULLDIR}" ];then
     :
 else 
@@ -54,13 +54,15 @@ else
     mkdir ${LOGDIR} -p
 fi
 
-##########################mysqldump
+##########################mysqldump  #########################################
+
 ##########################完全备份
 
+# --single-transaction 不锁表备份 参数看自己是否需要添加
 
 ALLDUMP() {
     DATANAME=
-#添加 -A参数
+#添加 -A参数 -P参数
     mysqldump  -P ${PORT} -A -u${USER} -p${PASSWORD} ${dump_args} > ${FULLDIR}/${DATANAME}full_${DATENAME}.sql 2>${dump_log}
     if [ "$?" == 0 ];then
         echo "full_${DATENAME}.sql backup sucess " >> ${full_success_log}
@@ -77,7 +79,7 @@ datadump() {
     if [ -n "${DATANAME}"  ];then
         for DB in ${DATANAME}
         do
-#####################添加 -B 参数
+#####################添加 -B参数 -P参数
             mysqldump  -P ${PORT} -u${USER} -p${PASSWORD} ${dump_args} -B ${DB} > ${DATADIR}/${DB}_${DATENAME}.sql 2>${dump_log}
             if [ "$?" == 0 ];then
                 echo "${DB}_${DATENAME}.sql backup sucess " >> ${base_sucess_log}
