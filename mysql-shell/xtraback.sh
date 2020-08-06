@@ -11,7 +11,7 @@
 # 完全备份命令
 # innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET} ${FULLDIR}
 # 增量备份命令
-#innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET}  --incremental --incremental-dir=${OLDDIR} ${INCDIR}
+#innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET}  --incremental --incremental-basedir=${OLDDIR} ${INCDIR}
 ###########################user passowrd
 
 #必须：数据库用户 
