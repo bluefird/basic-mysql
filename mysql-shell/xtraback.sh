@@ -8,6 +8,10 @@
 # commands:xtraback.sh
 # 添加执行权限： chmod +x xtraback.sh
 # 使用方式 :sh xtraback.sh A/I或者 xtraback.sh A/I
+# 完全备份命令
+# innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET} ${FULLDIR}
+# 增量备份命令
+#innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET}  --incremental --incremental-dir=${OLDDIR} ${INCDIR}
 ###########################user passowrd
 
 #必须：数据库用户 
@@ -73,7 +77,7 @@ incback() {
 
     #上次备份目录
     OLDDIR=`cat ${OLDFILE}`
-    innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET}  --incremental --incremental-dir=${OLDDIR} ${INCDIR} >> ${INNOBACK_LOG}
+    innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET}  --incremental --incremental-basedir=${OLDDIR} ${INCDIR} 1>/dev/null
     if [ "$?" -eq 0 ];then
         echo "INC ${INCDIR} backup sucess " >> ${SUCCESS_LOG}
     #记录备份点
@@ -89,7 +93,7 @@ incback() {
 
 ###################################完全备份
 fullback() {
-    innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET} ${FULLDIR} > ${INNOBACK_LOG}
+    innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET} ${FULLDIR} >> ${INNOBACK_LOG} 1>/dev/null
     if [ "$?" -eq 0 ];then
         echo "full ${FULLDIR} backup sucess " >> ${SUCCESS_LOG}
     #记录备份点
