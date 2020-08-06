@@ -76,7 +76,9 @@ incback() {
     innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET}  --incremental --incremental-dir=${OLDDIR} ${INCDIR} >> ${INNOBACK_LOG}
     if [ "$?" -eq 0 ];then
         echo "INC ${INCDIR} backup sucess " >> ${SUCCESS_LOG}
+    #记录备份点
         echo "${INCDIR}" > ${OLDFILE}
+    #累计备份点
         echo "${INCDIR} increment" >> ${BACKLIST}
         exit 0
     else 
@@ -90,7 +92,9 @@ fullback() {
     innobackupex --user=${USER} --password=${PASSWORD} --no-timestamp --socket=${SOCKET} ${FULLDIR} > ${INNOBACK_LOG}
     if [ "$?" -eq 0 ];then
         echo "full ${FULLDIR} backup sucess " >> ${SUCCESS_LOG}
+    #记录备份点
         echo "${FULLDIR}" > ${OLDFILE}
+    #累计备份次数
         echo "${FULLDIR} FULLDIR" >> ${BACKLIST}
         exit 0
     else 
