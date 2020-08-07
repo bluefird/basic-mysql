@@ -20,7 +20,7 @@ dump_args='-R -E --triggers --master-data=2   --set-gtid-purged=off --max-allowe
 #默认 必填3306，不是 默认可以自己修改
 PORT=3306
 #全局备份默认空，库备份自己填写，空格隔开,结尾不留空格
-DATANAME="world mysql employees sakila"
+DATANAME="test1 test2"
 ####################################backup dir
 #全库备份目录
 FULLDIR=/backup/dump/full
@@ -68,8 +68,6 @@ mysql_check () {
 }
 
 ##########################完全备份
-
-
 ALLDUMP() {
     DATANAME=
 #添加 -A参数
@@ -81,8 +79,6 @@ ALLDUMP() {
         exit 1
     fi
 }
-
-
 ##########################单库备份
 
 datadump() {
