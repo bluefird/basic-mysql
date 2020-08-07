@@ -74,6 +74,7 @@ ALLDUMP() {
     mysqldump  -P ${PORT} -A -u${USER} -p${PASSWORD} ${dump_args} > ${FULLDIR}/${DATANAME}full_${DATENAME}.sql 2>${dump_log}
     if [ "$?" == 0 ];then
         echo "full_${DATENAME}.sql backup sucess " >> ${full_success_log}
+        echo "备份文件 ${FULLDIR}/${DATANAME}full_${DATENAME}.sql"
     else
         echo "full_${DATENAME}.sql backup error  " >> ${full_error_log}
         exit 1
@@ -88,6 +89,7 @@ datadump() {
 #####################添加 -B 参数
             mysqldump  -P ${PORT} -u${USER} -p${PASSWORD} ${dump_args} -B ${DB} > ${DATADIR}/${DB}_${DATENAME}.sql 2>${dump_log}
             if [ "$?" == 0 ];then
+                echo "备份文件  ${DATADIR}/${DB}_${DATENAME}.sql"
                 echo "${DB}_${DATENAME}.sql backup sucess " >> ${base_sucess_log}
             else
                 echo "${DB}_${DATENAME}.sql backup error  " >> ${base_error_log}
