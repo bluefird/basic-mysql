@@ -13,7 +13,7 @@ USER=root
 #数据库用户密码 必须
 PASSWORD=123456
 #以日期作为文件名
-DATENAME=`date +%Y%d%H%M`
+DATENAME=`date +%Y%m%d%H%S`
 # --single-transaction 不锁表备份 参数看自己是否需要添加
 #全局备份参数 --max-allowed-packet=256M 自己调整 看库大小
 dump_args='-R -E --triggers --master-data=2   --set-gtid-purged=off --max-allowed-packet=256M'
