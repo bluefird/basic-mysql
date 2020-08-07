@@ -6,7 +6,7 @@
 # commands: mysqldump
 # dump_args='-R -E --triggers --master-data=2   --set-gtid-purged=off'
 # 添加执行权限： chmod +x mysqldump.sh 
-# 使用方式 : mysqldump.sh all / mysqldump base 
+# 使用方式 : mysqldump.sh A / mysqldump B 
 ###########################user passowrd
 #数据库用户 必须
 USER=root
@@ -107,14 +107,14 @@ datadump() {
 main() {
     mysql_check
     case $1 in 
-        all)
+        A)
             ALLDUMP
             ;;
-        base)
+        B)
             datadump
             ;;
         *)
-            echo "usage:command all / base...."
+            echo "usage:mysqldump.sh A / B"
             ;;
     esac
 }
